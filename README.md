@@ -16,16 +16,36 @@ OpenCV
 pandas
 matplotlib
 ```
-3. Exporting loaded COCO weights as TF checkpoint(`yolov3_coco.ckpt`)【[BaiduCloud](https://pan.baidu.com/s/11mwiUy8KotjUVQXqkGGPFQ&shfl=sharepset)】
-```bashrc
-$ cd RW-PRID-2020/pYOLO
-$ cd checkpoint
-$ wget https://github.com/YunYang1994/tensorflow-yolov3/releases/download/v1.0/yolov3_coco.tar.gz
-$ tar -xvf yolov3_coco.tar.gz
-$ cd ..
-$ python convert_weight.py
-$ python freeze_graph.py
-```
+# 1.1 other option for yolov3 in TF 1.14.0
+
+* Donwload model of yolov3 for tf and save on directory 'pYOLO/checkpoint'
+* link of model is below:
+
+link: https://drive.google.com/file/d/1kQ6BTs3-B6A_fUUDqsYFGp7yYL0d2k87/view?usp=sharing 
+
+* also, the yolov3_coco.pb donwload and save in '/pYOLO'
+
+link: https://drive.google.com/open?id=1WxpW_UB6ci4vC_34CnpvXKoAaqz8DiOF
+
+# 2. Installing and Execution
+# 2.1 : Preaparing enviroment
+
+* Create env and install requirements
+  ```
+   conda create -n reid tensorflow-gpu=1.14
+   conda activate reid
+   pip install -r requirements.txt
+  ```
+
+* Execute the next command:
+
+  ```
+   python demo.py --video=data/input3.avi
+  ```
+* --video , flag for input video for the counter
+* if not video, the input is the web cam
+* the output video will be on root path like to 'output3.avi'
+
 4. Exporting loaded Re-id weights as TF checkpoint(`model.ckpt`)
 ```bashrc
 $ cd RW-PRID-2020/logs
