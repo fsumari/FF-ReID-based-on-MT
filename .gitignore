@@ -1,5 +1,15 @@
 data/seq1/cropps/
 data/seq1/out_reid/
+data/seq1/mtcropps/
+data/seq1/out_mt+reid/
+data/seq2/cropps/
+data/seq2/out_reid/
+data/seq2/mtcropps/
+data/seq2/out_mt+reid/
+data/seq3/cropps/
+data/seq3/out_reid/
+data/seq3/mtcropps/
+data/seq3/out_mt+reid/
 data/DataSet
 logs/
 pYOLO/docs/

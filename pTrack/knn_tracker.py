@@ -43,7 +43,8 @@ class KNNTracker():
 		del self.all_features[track_ID]
 	
 	def delete_all(self, cropps_path):
-		for ID in self.tracks.keys():
+		copy_tracks = self.tracks.copy() 
+		for ID in copy_tracks.keys():
 			self.del_track(ID, cropps_path)
 
 	def update_matchs(self, detects_bboxs, detects_features, cropps_path):

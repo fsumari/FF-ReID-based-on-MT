@@ -154,7 +154,7 @@ class personReIdentifier(object):
             #*** agarrando el mas representativo
             with open(carpet +'/features.txt', "rb") as fp: 
                 vgg16_feature_list_np = pickle.load(fp)
-            nn=1
+            nn=2
             print('features shape: ', np.shape(vgg16_feature_list_np))
             kmeans = KMeans(n_clusters=1, random_state=0).fit(vgg16_feature_list_np)
             neigh = NearestNeighbors(n_neighbors=nn)
@@ -163,20 +163,21 @@ class personReIdentifier(object):
             neight_in = neight_in.flatten()
             print('mas perto a k: ', neight_in)
             #***
-            x = carpet_files[neight_in[0]] # 
-            print('representate: ', x)
-            image2 = cv2.imread(x)
-            image2 = cv2.resize(image2, (IMAGE_WIDTH, IMAGE_HEIGHT))
-            image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
-            image2 = np.reshape(image2, (1, IMAGE_HEIGHT, IMAGE_WIDTH, 3)).astype(float)
-            test_images = np.array([image1, image2])
-            feed_dict = {self.images: test_images, self.is_train: False}
-            prediction = self.sess.run(self.inference, feed_dict=feed_dict)
-            
-            print('scores: ', prediction[0][0], prediction[0][1])
-            if bool(not np.argmax(prediction[0])):
-                tupl = (x, prediction[0][0], prediction[0][1])            
-                list_all.append(tupl)    
+            for idx in neight_in:
+                x = carpet_files[idx] 
+                print('representate: ', x)
+                image2 = cv2.imread(x)
+                image2 = cv2.resize(image2, (IMAGE_WIDTH, IMAGE_HEIGHT))
+                image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
+                image2 = np.reshape(image2, (1, IMAGE_HEIGHT, IMAGE_WIDTH, 3)).astype(float)
+                test_images = np.array([image1, image2])
+                feed_dict = {self.images: test_images, self.is_train: False}
+                prediction = self.sess.run(self.inference, feed_dict=feed_dict)
+                
+                print('scores: ', prediction[0][0], prediction[0][1])
+                if bool(not np.argmax(prediction[0])):
+                    tupl = (x, prediction[0][0], prediction[0][1])            
+                    list_all.append(tupl)
         list_all.sort(key = sortSecond , reverse = True)
         end = time.time()
         print("Time in seconds: ")
